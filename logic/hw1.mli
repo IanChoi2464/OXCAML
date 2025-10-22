@@ -1,32 +1,64 @@
-open! Core
+(** 
+  Pixel Game (2-player version)
+  Interface (.mli)
+  ----------------
+  This file defines the public types and values 
+  that other modules can use.
+*)
 
-type player_kind =
-  | X
-  | O
+(** Player type: only two players exist *)
+module Player_kind : sig
+  type t = Red | Blue
+end
 
-type cell_position =
-  { row : int
-  ; column : int
-  }
+(** A board cell coordinate *)
+module Cell_position : sig
+  type t =
+    { row : int
+    ; column : int
+    }
+end
 
-type decision =
-  | In_progress of { whose_turn : player_kind }
-  | Winner of player_kind
-  | Stalemate
+(** Game decision state *)
+module Decision : sig
+  type t =
+    | In_progress of { whose_turn : Player_kind.t }
+    | Winner of Player_kind.t
+    | Stalemate
+end
 
-type game_state =
-  { board : (cell_position * player_kind) list
-  ; rows : int
-  ; columns : int
-  ; winning_sequence_length : int
-  ; decision : decision
-  }
+(** Slider axis: row or column *)
+module Slider_axis : sig
+  type t = Row | Column
+end
 
-type move = cell_position
+(** A move = choosing one slider and setting its index *)
+module Move : sig
+  type t =
+    { slider : Slider_axis.t
+    ; index : int
+    }
+end
 
-val initial_state : game_state
-val move_at_0x0 : move
-val state_after_move_at_0x0 : game_state
-val before_terminal_state : game_state
-val move_to_terminal_state : move
-val terminal_state : game_state
+(** Main game state *)
+module Game_state : sig
+  type t =
+    { board : (Cell_position.t * Player_kind.t) list
+    ; rows : int
+    ; columns : int
+    ; row_slider : int
+    ; col_slider : int
+    ; winning_sequence_length : int
+    ; decision : Decision.t
+    }
+end
+
+(** Example predefined game states (for testing or demo) *)
+val initial_state : Game_state.t
+val move1 : Move.t
+val state_after_move1 : Game_state.t
+val move2 : Move.t
+val state_after_move2 : Game_state.t
+val before_terminal_state : Game_state.t
+val winning_move : Move.t
+val terminal_state : Game_state.t
