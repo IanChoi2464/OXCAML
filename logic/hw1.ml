@@ -4,7 +4,9 @@
   ========================================*)
 
 module Player_kind = struct
-  type t = Red | Blue
+  type t =
+    | Red
+    | Blue
 end
 
 module Cell_position = struct
@@ -22,13 +24,15 @@ module Decision = struct
 end
 
 module Slider_axis = struct
-  type t = Row | Column
+  type t =
+    | Row
+    | Column
 end
 
 module Move = struct
   type t =
     { slider : Slider_axis.t
-    ; index  : int
+    ; index : int
     }
   (* e.g., { slider = Row; index = 3 } or { slider = Column; index = 5 } *)
 end
@@ -52,8 +56,7 @@ open Move
 open Game_state
 open Slider_axis
 
-(*----------------------------------------
-   Initial empty 7x7 board
+(*---------------------------------------- Initial empty 7x7 board
   ---------------------------------------*)
 (*=
  . . . . . . .
@@ -79,7 +82,7 @@ let initial_state : Game_state.t =
 let move1 : Move.t = { slider = Row; index = 2 }
 
 let state_after_move1 : Game_state.t =
-  { board = [ ({ row = 2; column = 0 }, Red ) ]
+  { board = [ { row = 2; column = 0 }, Red ]
   ; rows = 7
   ; columns = 7
   ; row_slider = 2
@@ -93,10 +96,7 @@ let state_after_move1 : Game_state.t =
 let move2 : Move.t = { slider = Column; index = 2 }
 
 let state_after_move2 : Game_state.t =
-  { board =
-      [ ({ row = 2; column = 0 }, Red )
-      ; ({ row = 2; column = 2 }, Blue)
-      ]
+  { board = [ { row = 2; column = 0 }, Red; { row = 2; column = 2 }, Blue ]
   ; rows = 7
   ; columns = 7
   ; row_slider = 2
@@ -109,10 +109,10 @@ let state_after_move2 : Game_state.t =
 (* Before terminal state: Red has 3 in a row, about to win with (3,3) *)
 let before_terminal_state : Game_state.t =
   { board =
-      [ ({ row = 3; column = 0 }, Red )
-      ; ({ row = 3; column = 1 }, Red )
-      ; ({ row = 3; column = 2 }, Red )
-      ; ({ row = 2; column = 2 }, Blue)
+      [ { row = 3; column = 0 }, Red
+      ; { row = 3; column = 1 }, Red
+      ; { row = 3; column = 2 }, Red
+      ; { row = 2; column = 2 }, Blue
       ]
   ; rows = 7
   ; columns = 7
@@ -128,11 +128,11 @@ let winning_move : Move.t = { slider = Column; index = 3 }
 
 let terminal_state : Game_state.t =
   { board =
-      [ ({ row = 3; column = 0 }, Red )
-      ; ({ row = 3; column = 1 }, Red )
-      ; ({ row = 3; column = 2 }, Red )
-      ; ({ row = 3; column = 3 }, Red )
-      ; ({ row = 2; column = 2 }, Blue)
+      [ { row = 3; column = 0 }, Red
+      ; { row = 3; column = 1 }, Red
+      ; { row = 3; column = 2 }, Red
+      ; { row = 3; column = 3 }, Red
+      ; { row = 2; column = 2 }, Blue
       ]
   ; rows = 7
   ; columns = 7

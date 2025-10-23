@@ -106,14 +106,15 @@ let tic_tac_toe_board ~(game_state : Game_state.t) ~set_game_state =
          (List.init game_state.columns ~f:(fun column -> render_cell ~row ~column))))
 ;;
 
-let app (local_ graph) =
+let app (local_, graph) =
   let initial_state =
     Game_state.create ~winning_sequence_length:3 ~rows:3 ~columns:3
     |> Result.ok
     |> Option.value_exn
   in
   let game_state, set_game_state = Bonsai.state initial_state graph in
-  let%arr game_state and set_game_state in
+  let%arr game_state = game_state
+  and set_game_state = set_game_state in
   tic_tac_toe_board ~game_state ~set_game_state
 ;;
 

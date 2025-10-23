@@ -1,14 +1,14 @@
-(** 
-  Pixel Game (2-player version)
-  Interface (.mli)
-  ----------------
-  This file defines the public types and values 
-  that other modules can use.
-*)
+(** Pixel Game (2-player version)
+    Interface (.mli)
+    ----------------
+    This file defines the public types and values
+    that other modules can use. *)
 
 (** Player type: only two players exist *)
 module Player_kind : sig
-  type t = Red | Blue
+  type t =
+    | Red
+    | Blue
 end
 
 (** A board cell coordinate *)
@@ -29,7 +29,9 @@ end
 
 (** Slider axis: row or column *)
 module Slider_axis : sig
-  type t = Row | Column
+  type t =
+    | Row
+    | Column
 end
 
 (** A move = choosing one slider and setting its index *)
@@ -55,6 +57,7 @@ end
 
 (** Example predefined game states (for testing or demo) *)
 val initial_state : Game_state.t
+
 val move1 : Move.t
 val state_after_move1 : Game_state.t
 val move2 : Move.t
