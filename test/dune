@@ -1,6 +1,8 @@
+; test/dune
 (library
- (libraries core tictactoe_logic_library)
- (name tictactoe_test_library)
+ (name pixel_test_library)
+ (libraries core pixel_logic_library)
+ (preprocess (pps ppx_jane))
  (inline_tests)
- (preprocess
-  (pps ppx_jane)))
+ (modules (:standard \ hw4_alpha_beta_search_test)))
+
