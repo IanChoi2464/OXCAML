@@ -1,6 +1,3 @@
-(executables
- (modes js)
- (names pixel_bonsai_game)
- (libraries bonsai core pixel_logic_library)
- (preprocess
-  (pps ppx_jane bonsai.ppx_bonsai)))
+(executable
+ (name pixel_html_generator)
+ (libraries core pixel_logic_library))

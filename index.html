@@ -2,9 +2,13 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Pixel Game</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -12,7 +16,9 @@
             align-items: center;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         h1 {
@@ -25,6 +31,14 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                gap: 5px;
+            }
         }
 
         .board-container {
@@ -41,6 +55,25 @@
             background-color: #333;
             padding: 5px;
             border-radius: 5px;
+            touch-action: none;
+        }
+        
+        @media (max-width: 768px) {
+            .board {
+                grid-template-columns: repeat(8, 35px);
+                grid-template-rows: repeat(8, 35px);
+                gap: 0.5px;
+                padding: 3px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .board {
+                grid-template-columns: repeat(8, 30px);
+                grid-template-rows: repeat(8, 30px);
+                gap: 0.5px;
+                padding: 2px;
+            }
         }
 
         .y-slider-container {
@@ -56,6 +89,21 @@
             -webkit-appearance: slider-vertical;
             writing-mode: bt-lr;
             transform: rotate(180deg);
+            touch-action: pan-y;
+        }
+        
+        @media (max-width: 768px) {
+            .y-slider {
+                height: 280px;
+                width: 35px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .y-slider {
+                height: 240px;
+                width: 40px;
+            }
         }
 
         .x-slider-container {
@@ -69,6 +117,21 @@
         .x-slider {
             width: 375px;
             height: 30px;
+            touch-action: pan-x;
+        }
+        
+        @media (max-width: 768px) {
+            .x-slider {
+                width: 280px;
+                height: 35px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .x-slider {
+                width: 240px;
+                height: 40px;
+            }
         }
 
         .slider-label {
@@ -87,6 +150,22 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+            .cell {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cell {
+                width: 30px;
+                height: 30px;
+            }
         }
 
         .cell.corner {
@@ -141,10 +220,29 @@
             cursor: pointer;
             margin-top: 10px;
             transition: background-color 0.3s;
+            touch-action: manipulation;
+            min-height: 44px;
+            min-width: 44px;
         }
 
         .place-stone-btn:hover {
             background-color: #45a049;
+        }
+        
+        @media (max-width: 768px) {
+            .place-stone-btn {
+                padding: 15px 25px;
+                font-size: 18px;
+                min-height: 50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .place-stone-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+                min-height: 48px;
+            }
         }
 
         .place-stone-btn:disabled {
@@ -276,6 +374,15 @@
                     }
                 });
                 
+                // 터치 이벤트 추가
+                sliderX.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+                
+                sliderX.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                });
+                
                 sliderY.addEventListener('input', (e) => {
                     if (!this.gameOver) {
                         sliderYValue.textContent = e.target.value;
@@ -284,6 +391,15 @@
                         sliderXValue.textContent = this.lastSliderX;
                         this.updateDisplay();
                     }
+                });
+                
+                // 터치 이벤트 추가
+                sliderY.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+                
+                sliderY.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
                 });
                 
                 placeStoneBtn.addEventListener('click', () => {
