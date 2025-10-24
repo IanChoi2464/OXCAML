@@ -1,0 +1,109 @@
+/* Test states container styling */
+.test-app {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.test-state-container {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.test-title {
+  color: #444;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.game-info {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #666;
+  text-align: center;
+}
+
+/* Game board styling (inherited from hw5) */
+body {
+  background-color: rgb(250, 250, 250);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.game {
+  width: 300px;
+  height: 300px;
+  aspect-ratio: 1;
+  position: relative;
+  margin: 0 auto;
+}
+
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -moz-touch-callout: none;
+  -ms-touch-callout: none;
+  outline: 0;
+}
+
+.border_right {
+  border-right: 2px solid black;
+}
+
+.border_bottom {
+  border-bottom: 2px solid black;
+}
+
+.corner_cell {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+.row {
+  position: absolute;
+  left: 0%;
+  width: 100%;
+}
+
+.column {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.max_size {
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.slowly_appear {
+  animation: slowly_appear 0.5s linear;
+}
+
+@keyframes slowly_appear {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
