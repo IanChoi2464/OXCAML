@@ -29,6 +29,13 @@
 
         .board-container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .board-row {
+            display: flex;
             align-items: center;
             gap: 10px;
         }
@@ -63,7 +70,6 @@
             flex-direction: column;
             align-items: center;
             gap: 5px;
-            margin-left: 60px; /* Y 슬라이더 너비(30px) + gap(10px) */
         }
 
         .x-slider {
@@ -175,19 +181,21 @@
     
     <div class="game-container">
         <div class="board-container">
-            <div class="y-slider-container">
-                <div class="slider-label">Y Position</div>
-                <input type="range" id="sliderY" class="y-slider" min="0" max="7" value="3" orient="vertical">
-                <div class="slider-value" id="sliderYValue">3</div>
+            <div class="board-row">
+                <div class="y-slider-container">
+                    <div class="slider-label">Y Position</div>
+                    <input type="range" id="sliderY" class="y-slider" min="0" max="7" value="3" orient="vertical">
+                    <div class="slider-value" id="sliderYValue">3</div>
+                </div>
+                
+                <div class="board" id="board"></div>
             </div>
             
-            <div class="board" id="board"></div>
-        </div>
-        
-        <div class="x-slider-container">
-            <div class="slider-label">X Position</div>
-            <input type="range" id="sliderX" class="x-slider" min="0" max="7" value="3">
-            <div class="slider-value" id="sliderXValue">3</div>
+            <div class="x-slider-container">
+                <div class="slider-label">X Position</div>
+                <input type="range" id="sliderX" class="x-slider" min="0" max="7" value="3">
+                <div class="slider-value" id="sliderXValue">3</div>
+            </div>
         </div>
         
         <div class="controls">
