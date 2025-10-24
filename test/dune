@@ -1,7 +1,5 @@
-; test/dune
 (library
  (name pixel_test_library)
  (libraries core pixel_logic_library)
  (preprocess (pps ppx_jane))
  (inline_tests))
-
