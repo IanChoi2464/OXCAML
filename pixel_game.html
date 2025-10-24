@@ -19,6 +19,12 @@
             padding: 10px;
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         h1 {
@@ -40,6 +46,16 @@
             .game-container {
                 flex-direction: column;
                 gap: 10px;
+                align-items: center;
+            }
+            
+            .slider-container {
+                order: 1;
+                margin-bottom: 10px;
+            }
+            
+            .board {
+                order: 2;
             }
         }
 
@@ -352,15 +368,19 @@
                     }
                 });
                 
-                // 터치 이벤트 추가
+                // 터치 이벤트 추가 - X 슬라이더
                 sliderX.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderX.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderX.addEventListener('touchend', (e) => {
@@ -376,15 +396,19 @@
                     }
                 });
                 
-                // 터치 이벤트 추가
+                // 터치 이벤트 추가 - Y 슬라이더
                 sliderY.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderY.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderY.addEventListener('touchend', (e) => {

@@ -19,6 +19,12 @@
             padding: 10px;
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         h1 {
@@ -55,6 +61,22 @@
             .board-container {
                 flex-direction: column;
                 gap: 5px;
+                align-items: center;
+            }
+            
+            .y-slider-container {
+                order: 1;
+                margin-bottom: 10px;
+            }
+            
+            .board {
+                order: 2;
+            }
+            
+            .x-slider-container {
+                order: 3;
+                margin-top: 10px;
+                margin-left: 0;
             }
         }
 
@@ -119,15 +141,21 @@
         
         @media (max-width: 768px) {
             .y-slider {
-                height: 280px;
-                width: 35px;
+                height: 35px;
+                width: 280px;
+                -webkit-appearance: slider-horizontal;
+                writing-mode: lr-tb;
+                transform: none;
             }
         }
         
         @media (max-width: 480px) {
             .y-slider {
-                height: 240px;
-                width: 40px;
+                height: 40px;
+                width: 240px;
+                -webkit-appearance: slider-horizontal;
+                writing-mode: lr-tb;
+                transform: none;
             }
         }
 
@@ -421,15 +449,19 @@
                     }
                 });
                 
-                // 터치 이벤트 추가
+                // 터치 이벤트 추가 - X 슬라이더
                 sliderX.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderX.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderX.addEventListener('touchend', (e) => {
@@ -447,15 +479,19 @@
                     }
                 });
                 
-                // 터치 이벤트 추가
+                // 터치 이벤트 추가 - Y 슬라이더
                 sliderY.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderY.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                    if (e.touches.length === 1) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
                 });
                 
                 sliderY.addEventListener('touchend', (e) => {
