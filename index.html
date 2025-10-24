@@ -22,8 +22,15 @@
 
         .game-container {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
             align-items: center;
+            gap: 10px;
+        }
+
+        .board-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .board {
@@ -34,6 +41,39 @@
             background-color: #333;
             padding: 5px;
             border-radius: 5px;
+        }
+
+        .y-slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .y-slider {
+            width: 30px;
+            height: 400px;
+            -webkit-appearance: slider-vertical;
+            writing-mode: bt-lr;
+            transform: rotate(180deg);
+        }
+
+        .x-slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .x-slider {
+            width: 400px;
+            height: 30px;
+        }
+
+        .slider-label {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
         }
 
         .cell {
@@ -79,22 +119,8 @@
         .controls {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 15px;
-        }
-
-        .slider-container {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .slider-container label {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .slider {
-            width: 200px;
         }
 
         .slider-value {
@@ -147,21 +173,23 @@
     <h1>Pixel Game</h1>
     
     <div class="game-container">
-        <div class="board" id="board"></div>
-        
-        <div class="controls">
-            <div class="slider-container">
-                <label for="sliderX">X Position</label>
-                <input type="range" id="sliderX" class="slider" min="0" max="7" value="3">
-                <div class="slider-value" id="sliderXValue">3</div>
-            </div>
-            
-            <div class="slider-container">
-                <label for="sliderY">Y Position</label>
-                <input type="range" id="sliderY" class="slider" min="0" max="7" value="3">
+        <div class="board-container">
+            <div class="y-slider-container">
+                <div class="slider-label">Y Position</div>
+                <input type="range" id="sliderY" class="y-slider" min="0" max="7" value="3" orient="vertical">
                 <div class="slider-value" id="sliderYValue">3</div>
             </div>
             
+            <div class="board" id="board"></div>
+        </div>
+        
+        <div class="x-slider-container">
+            <div class="slider-label">X Position</div>
+            <input type="range" id="sliderX" class="x-slider" min="0" max="7" value="3">
+            <div class="slider-value" id="sliderXValue">3</div>
+        </div>
+        
+        <div class="controls">
             <button id="placeStoneBtn" class="place-stone-btn">Place Stone</button>
         </div>
     </div>
