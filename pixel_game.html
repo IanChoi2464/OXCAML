@@ -30,7 +30,6 @@
             display: flex;
             gap: 20px;
             align-items: center;
-            flex-wrap: wrap;
             justify-content: center;
             width: 100%;
             max-width: 100vw;
@@ -129,6 +128,12 @@
             width: 200px;
             height: 30px;
             touch-action: pan-x;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
         @media (max-width: 768px) {
@@ -347,12 +352,44 @@
                     }
                 });
                 
+                // 터치 이벤트 추가
+                sliderX.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                
+                sliderX.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                
+                sliderX.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                
                 sliderY.addEventListener('input', (e) => {
                     if (!this.sliderMoved && !this.gameOver) {
                         sliderYValue.textContent = e.target.value;
                         this.sliderMoved = true;
                         this.updateDisplay();
                     }
+                });
+                
+                // 터치 이벤트 추가
+                sliderY.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                
+                sliderY.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                
+                sliderY.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                 });
             }
             
