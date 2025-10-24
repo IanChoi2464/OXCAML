@@ -3,6 +3,5 @@
  (name pixel_test_library)
  (libraries core pixel_logic_library)
  (preprocess (pps ppx_jane))
- (inline_tests)
- (modules (:standard \ hw4_alpha_beta_search_test)))
+ (inline_tests))
 
