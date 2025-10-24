@@ -60,13 +60,14 @@
         @media (max-width: 768px) {
             .board-container {
                 flex-direction: column;
-                gap: 5px;
+                gap: 10px;
                 align-items: center;
+                width: 100%;
             }
             
             .y-slider-container {
                 order: 1;
-                margin-bottom: 10px;
+                margin-bottom: 5px;
             }
             
             .board {
@@ -75,7 +76,7 @@
             
             .x-slider-container {
                 order: 3;
-                margin-top: 10px;
+                margin-top: 5px;
                 margin-left: 0;
             }
         }
@@ -141,8 +142,8 @@
         
         @media (max-width: 768px) {
             .y-slider {
-                height: 35px;
-                width: 280px;
+                height: 40px;
+                width: 300px;
                 -webkit-appearance: slider-horizontal;
                 writing-mode: lr-tb;
                 transform: none;
@@ -151,8 +152,8 @@
         
         @media (max-width: 480px) {
             .y-slider {
-                height: 40px;
-                width: 240px;
+                height: 45px;
+                width: 250px;
                 -webkit-appearance: slider-horizontal;
                 writing-mode: lr-tb;
                 transform: none;
@@ -190,22 +191,22 @@
         
         @media (max-width: 768px) {
             .x-slider {
-                width: 280px;
-                height: 35px;
+                width: 300px;
+                height: 40px;
             }
         }
         
         @media (max-width: 480px) {
             .x-slider {
-                width: 240px;
-                height: 40px;
+                width: 250px;
+                height: 45px;
             }
         }
         
         @media (max-width: 360px) {
             .x-slider {
-                width: 200px;
-                height: 40px;
+                width: 220px;
+                height: 45px;
             }
         }
 
@@ -373,7 +374,14 @@
         <div id="winner" class="winner" style="display: none;"></div>
     </div>
 
-    <script>
+        <script>
+        // 에러 방지 코드
+        if (typeof window !== 'undefined') {
+            window.addEventListener('error', function(e) {
+                console.log('Error caught:', e.error);
+            });
+        }
+        
         class PixelGame {
             constructor() {
                 this.board = Array(8).fill().map(() => Array(8).fill(null));
@@ -449,24 +457,13 @@
                     }
                 });
                 
-                // 터치 이벤트 추가 - X 슬라이더
+                // 터치 이벤트 단순화 - X 슬라이더
                 sliderX.addEventListener('touchstart', (e) => {
-                    if (e.touches.length === 1) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
+                    e.preventDefault();
                 });
                 
                 sliderX.addEventListener('touchmove', (e) => {
-                    if (e.touches.length === 1) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                });
-                
-                sliderX.addEventListener('touchend', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                 });
                 
                 sliderY.addEventListener('input', (e) => {
@@ -479,24 +476,13 @@
                     }
                 });
                 
-                // 터치 이벤트 추가 - Y 슬라이더
+                // 터치 이벤트 단순화 - Y 슬라이더
                 sliderY.addEventListener('touchstart', (e) => {
-                    if (e.touches.length === 1) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
+                    e.preventDefault();
                 });
                 
                 sliderY.addEventListener('touchmove', (e) => {
-                    if (e.touches.length === 1) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                });
-                
-                sliderY.addEventListener('touchend', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                 });
                 
                 placeStoneBtn.addEventListener('click', () => {
