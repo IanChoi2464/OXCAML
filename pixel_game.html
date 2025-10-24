@@ -30,6 +30,18 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
         .board {
@@ -93,13 +105,85 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+        
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .slider-container {
+                order: 2;
+                margin-top: 10px;
+            }
+        }
 
         .cell.slider-position {
             background-color: #FFD700;
         }
+        
+        .slider {
+            width: 200px;
+            height: 30px;
+            touch-action: pan-x;
+        }
+        
+        @media (max-width: 768px) {
+            .slider {
+                width: 250px;
+                height: 35px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slider {
+                width: 200px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .slider {
+                width: 180px;
+                height: 40px;
+            }
+        }
 
         .cell.clickable {
             cursor: pointer;
+        }
+        
+        .place-stone-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            touch-action: manipulation;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        @media (max-width: 768px) {
+            .place-stone-btn {
+                padding: 15px 25px;
+                font-size: 18px;
+                min-height: 50px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .place-stone-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+                min-height: 48px;
+            }
         }
 
         .stone {
