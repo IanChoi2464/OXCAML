@@ -103,6 +103,28 @@
             color: #666;
         }
 
+        .place-stone-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .place-stone-btn:hover {
+            background-color: #45a049;
+        }
+
+        .place-stone-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
         .game-info {
             margin-top: 20px;
             text-align: center;
@@ -139,6 +161,8 @@
                 <input type="range" id="sliderY" class="slider" min="0" max="7" value="3">
                 <div class="slider-value" id="sliderYValue">3</div>
             </div>
+            
+            <button id="placeStoneBtn" class="place-stone-btn">Place Stone</button>
         </div>
     </div>
     
@@ -152,8 +176,9 @@
             constructor() {
                 this.board = Array(8).fill().map(() => Array(8).fill(null));
                 this.currentPlayer = 'red';
-                this.sliderMoved = false;
                 this.gameOver = false;
+                this.lastSliderX = 3;
+                this.lastSliderY = 3;
                 
                 // 초기 돌 배치
                 this.board[3][3] = 'red';
@@ -194,13 +219,10 @@
                             cell.appendChild(stone);
                         }
                         
-                        // 클릭 가능한 칸 (슬라이더 위치이고 비어있는 칸)
-                        if (!this.board[row][col] && 
-                            row === parseInt(document.getElementById('sliderY').value) && 
-                            col === parseInt(document.getElementById('sliderX').value) &&
-                            !this.gameOver) {
-                            cell.classList.add('clickable');
-                            cell.addEventListener('click', () => this.makeMove(row, col));
+                        // 슬라이더 위치 표시 (클릭 불가, 버튼으로만 돌을 둘 수 있음)
+                        if (row === parseInt(document.getElementById('sliderY').value) && 
+                            col === parseInt(document.getElementById('sliderX').value)) {
+                            // 슬라이더 위치는 노란색으로 표시하되 클릭은 불가
                         }
                         
                         boardElement.appendChild(cell);
@@ -213,32 +235,58 @@
                 const sliderY = document.getElementById('sliderY');
                 const sliderXValue = document.getElementById('sliderXValue');
                 const sliderYValue = document.getElementById('sliderYValue');
+                const placeStoneBtn = document.getElementById('placeStoneBtn');
                 
                 sliderX.addEventListener('input', (e) => {
-                    if (!this.sliderMoved && !this.gameOver) {
+                    if (!this.gameOver) {
                         sliderXValue.textContent = e.target.value;
-                        this.sliderMoved = true;
+                        // X 슬라이더를 움직이면 Y 슬라이더를 이전 위치로 리셋
+                        sliderY.value = this.lastSliderY;
+                        sliderYValue.textContent = this.lastSliderY;
                         this.updateDisplay();
                     }
                 });
                 
                 sliderY.addEventListener('input', (e) => {
-                    if (!this.sliderMoved && !this.gameOver) {
+                    if (!this.gameOver) {
                         sliderYValue.textContent = e.target.value;
-                        this.sliderMoved = true;
+                        // Y 슬라이더를 움직이면 X 슬라이더를 이전 위치로 리셋
+                        sliderX.value = this.lastSliderX;
+                        sliderXValue.textContent = this.lastSliderX;
                         this.updateDisplay();
                     }
                 });
+                
+                placeStoneBtn.addEventListener('click', () => {
+                    this.placeStone();
+                });
             }
             
-            makeMove(row, col) {
-                if (this.gameOver || this.board[row][col] || this.sliderMoved) {
+            placeStone() {
+                if (this.gameOver) {
+                    return;
+                }
+                
+                const row = parseInt(document.getElementById('sliderY').value);
+                const col = parseInt(document.getElementById('sliderX').value);
+                
+                // 해당 위치가 비어있는지 확인
+                if (this.board[row][col]) {
+                    alert('이미 돌이 있는 위치입니다!');
+                    return;
+                }
+                
+                // 모서리 칸인지 확인
+                if ((row === 0 && col === 0) || (row === 0 && col === 7) || 
+                    (row === 7 && col === 0) || (row === 7 && col === 7)) {
+                    alert('모서리 칸에는 돌을 둘 수 없습니다!');
                     return;
                 }
                 
                 this.board[row][col] = this.currentPlayer;
+                this.lastSliderX = col;
+                this.lastSliderY = row;
                 this.currentPlayer = this.currentPlayer === 'red' ? 'blue' : 'red';
-                this.sliderMoved = false;
                 
                 // 승리 조건 확인
                 if (this.checkWinner(row, col)) {
@@ -297,16 +345,24 @@
                 document.getElementById('currentPlayer').textContent = 
                     `Current Player: ${this.currentPlayer === 'red' ? 'Red' : 'Blue'}`;
                 
-                // 슬라이더 비활성화
-                const sliderX = document.getElementById('sliderX');
-                const sliderY = document.getElementById('sliderY');
+                // Place Stone 버튼 상태 업데이트
+                const placeStoneBtn = document.getElementById('placeStoneBtn');
+                const row = parseInt(document.getElementById('sliderY').value);
+                const col = parseInt(document.getElementById('sliderX').value);
                 
-                if (this.sliderMoved) {
-                    sliderX.disabled = true;
-                    sliderY.disabled = true;
+                if (this.gameOver) {
+                    placeStoneBtn.disabled = true;
+                    placeStoneBtn.textContent = 'Game Over';
+                } else if (this.board[row][col]) {
+                    placeStoneBtn.disabled = true;
+                    placeStoneBtn.textContent = 'Position Occupied';
+                } else if ((row === 0 && col === 0) || (row === 0 && col === 7) || 
+                          (row === 7 && col === 0) || (row === 7 && col === 7)) {
+                    placeStoneBtn.disabled = true;
+                    placeStoneBtn.textContent = 'Corner Not Allowed';
                 } else {
-                    sliderX.disabled = false;
-                    sliderY.disabled = false;
+                    placeStoneBtn.disabled = false;
+                    placeStoneBtn.textContent = 'Place Stone';
                 }
             }
         }
