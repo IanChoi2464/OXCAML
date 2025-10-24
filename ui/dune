@@ -1,6 +1,6 @@
 (executables
  (modes js)
- (names hw6_bonsai_ui hw6_test_states)
- (libraries bonsai_web core pixel_logic_library)
+ (names simple_pixel_game)
+ (libraries bonsai core pixel_logic_library)
  (preprocess
   (pps ppx_jane bonsai.ppx_bonsai)))

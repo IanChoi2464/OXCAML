@@ -2,7 +2,6 @@ open! Core
 open Pixel_logic_library
 open Hw1
 open Hw2_pixel_logic
-open Virtual_dom
 open! Bonsai.Let_syntax
 
 let lookup_cell (game_state : Game_state.t) ~row ~column =
@@ -143,4 +142,4 @@ let app =
     ]
 ;;
 
-let () = Bonsai_web.Start.start app
+let () = Bonsai.Start.start app

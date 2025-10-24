@@ -11,8 +11,8 @@ let heuristic_value (node : Game_state.t) =
        - Blocking opponent's threats
     *)
     let board = node.board in
-    let red_count = Map.count board ~f:(fun _ -> Player_kind.equal Red) in
-    let blue_count = Map.count board ~f:(fun _ -> Player_kind.equal Blue) in
+    let red_count = Map.count board ~f:(fun _ player -> Player_kind.equal player Red) in
+    let blue_count = Map.count board ~f:(fun _ player -> Player_kind.equal player Blue) in
     (* Simple heuristic: more stones = better position *)
     red_count - blue_count
   | Winner player_kind ->

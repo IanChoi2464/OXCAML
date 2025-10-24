@@ -1,17 +1,16 @@
 open! Core
 open Pixel_logic_library
 open Hw2_pixel_logic
-open Virtual_dom
 open! Bonsai.Let_syntax
 
 let lookup_cell (game_state : Game_state.t) ~row ~column =
   Map.find game_state.board { row; column }
 ;;
 
-let viewbox = Vdom.Attr.create "viewBox" "0 0 100 100"
+let viewbox = Bonsai.Vdom.Attr.create "viewBox" "0 0 100 100"
 
 let red_stone =
-  Vdom.Node.inner_html_svg
+  Bonsai.Vdom.Node.inner_html_svg
     ~tag:"svg"
     ~attrs:[ viewbox ]
     ~this_html_is_sanitized_and_is_totally_safe_trust_me:
@@ -20,7 +19,7 @@ let red_stone =
 ;;
 
 let blue_stone =
-  Vdom.Node.inner_html_svg
+  Bonsai.Vdom.Node.inner_html_svg
     ~tag:"svg"
     ~attrs:[ viewbox ]
     ~this_html_is_sanitized_and_is_totally_safe_trust_me:
@@ -130,4 +129,4 @@ let app =
   pixel_game_board ~game_state ~set_game_state
 ;;
 
-let () = Bonsai_web.Start.start app
+let () = Bonsai.Start.start app
