@@ -2,13 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Game</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -16,15 +12,7 @@
             align-items: center;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 10px;
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+            padding: 20px;
         }
 
         h1 {
@@ -37,48 +25,12 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        @media (max-width: 768px) {
-            .game-container {
-                gap: 5px;
-            }
         }
 
         .board-container {
             display: flex;
             align-items: center;
             gap: 10px;
-            justify-content: center;
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: auto;
-        }
-        
-        @media (max-width: 768px) {
-            .board-container {
-                flex-direction: column;
-                gap: 10px;
-                align-items: center;
-                width: 100%;
-            }
-            
-            .y-slider-container {
-                order: 1;
-                margin-bottom: 5px;
-            }
-            
-            .board {
-                order: 2;
-            }
-            
-            .x-slider-container {
-                order: 3;
-                margin-top: 5px;
-                margin-left: 0;
-            }
         }
 
         .board {
@@ -89,25 +41,6 @@
             background-color: #333;
             padding: 5px;
             border-radius: 5px;
-            touch-action: none;
-        }
-        
-        @media (max-width: 768px) {
-            .board {
-                grid-template-columns: repeat(8, 35px);
-                grid-template-rows: repeat(8, 35px);
-                gap: 0.5px;
-                padding: 3px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .board {
-                grid-template-columns: repeat(8, 30px);
-                grid-template-rows: repeat(8, 30px);
-                gap: 0.5px;
-                padding: 2px;
-            }
         }
 
         .y-slider-container {
@@ -115,16 +48,6 @@
             flex-direction: column;
             align-items: center;
             gap: 5px;
-            flex-shrink: 0;
-            padding: 20px;
-            min-height: 100px;
-        }
-        
-        @media (max-width: 768px) {
-            .y-slider-container {
-                order: 2;
-                margin-top: 10px;
-            }
         }
 
         .y-slider {
@@ -133,39 +56,6 @@
             -webkit-appearance: slider-vertical;
             writing-mode: bt-lr;
             transform: rotate(180deg);
-            touch-action: pan-y;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            padding: 10px 0;
-            margin: 10px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .y-slider {
-                height: 60px;
-                width: 300px;
-                -webkit-appearance: slider-horizontal;
-                writing-mode: lr-tb;
-                transform: none;
-                padding: 15px 0;
-                margin: 15px 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .y-slider {
-                height: 70px;
-                width: 250px;
-                -webkit-appearance: slider-horizontal;
-                writing-mode: lr-tb;
-                transform: none;
-                padding: 20px 0;
-                margin: 20px 0;
-            }
         }
 
         .x-slider-container {
@@ -174,58 +64,11 @@
             align-items: center;
             gap: 5px;
             margin-left: 80px;
-            flex-shrink: 0;
-            padding: 20px;
-            min-height: 100px;
-        }
-        
-        @media (max-width: 768px) {
-            .x-slider-container {
-                order: 3;
-                margin-left: 0;
-                margin-top: 10px;
-            }
         }
 
         .x-slider {
             width: 375px;
             height: 30px;
-            touch-action: pan-x;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            padding: 0 10px;
-            margin: 10px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .x-slider {
-                width: 300px;
-                height: 60px;
-                padding: 0 15px;
-                margin: 15px 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .x-slider {
-                width: 250px;
-                height: 70px;
-                padding: 0 20px;
-                margin: 20px 0;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .x-slider {
-                width: 220px;
-                height: 70px;
-                padding: 0 20px;
-                margin: 20px 0;
-            }
         }
 
         .slider-label {
@@ -244,22 +87,6 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
-            touch-action: manipulation;
-            user-select: none;
-        }
-        
-        @media (max-width: 768px) {
-            .cell {
-                width: 35px;
-                height: 35px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .cell {
-                width: 30px;
-                height: 30px;
-            }
         }
 
         .cell.corner {
@@ -307,38 +134,17 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 10px 20px;
+            font-size: 16px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 10px;
             transition: background-color 0.3s;
-            touch-action: manipulation;
-            min-height: 60px;
-            min-width: 120px;
         }
 
         .place-stone-btn:hover {
             background-color: #45a049;
-        }
-        
-        @media (max-width: 768px) {
-            .place-stone-btn {
-                padding: 20px 35px;
-                font-size: 20px;
-                min-height: 70px;
-                min-width: 150px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .place-stone-btn {
-                padding: 18px 30px;
-                font-size: 18px;
-                min-height: 65px;
-                min-width: 140px;
-            }
         }
 
         .place-stone-btn:disabled {
@@ -394,14 +200,7 @@
         <div id="winner" class="winner" style="display: none;"></div>
     </div>
 
-        <script>
-        // 에러 방지 코드
-        if (typeof window !== 'undefined') {
-            window.addEventListener('error', function(e) {
-                console.log('Error caught:', e.error);
-            });
-        }
-        
+    <script>
         class PixelGame {
             constructor() {
                 this.board = Array(8).fill().map(() => Array(8).fill(null));
@@ -477,15 +276,6 @@
                     }
                 });
                 
-                // 터치 이벤트 단순화 - X 슬라이더
-                sliderX.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                });
-                
-                sliderX.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                });
-                
                 sliderY.addEventListener('input', (e) => {
                     if (!this.gameOver) {
                         sliderYValue.textContent = e.target.value;
@@ -494,15 +284,6 @@
                         sliderXValue.textContent = this.lastSliderX;
                         this.updateDisplay();
                     }
-                });
-                
-                // 터치 이벤트 단순화 - Y 슬라이더
-                sliderY.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                });
-                
-                sliderY.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
                 });
                 
                 placeStoneBtn.addEventListener('click', () => {
