@@ -58,23 +58,39 @@ input {
   user-select: text !important;
 }
 
-/* For tictactoe, to make a right/bottom border.
-E.g., to make:
+/* For Pixel game, to make a right/bottom border.
+E.g., to make an 8x8 grid with corner cells disabled:
 
-X| |
------
- | |
------
-O| |
+ | | | | | | | |
+---------
+ | | | | | | | |
+---------
+ | |R| | | | | |
+---------
+ | | | |B| | | |
+---------
+ | | | | | | | |
+---------
+ | | | | | | | |
+---------
+ | | | | | | | |
+---------
+ | | | | | | | |
 
-We add right&bottom borders to the top-left cell (with X),
-but only right borrder to the bottom-left cell (with O), etc.
+We add right&bottom borders to create the grid,
+and corner cells are marked as unusable.
 */
 .border_right {
   border-right: min(1vw, 1vh) solid black;
 }
 .border_bottom {
   border-bottom: min(1vw, 1vh) solid black;
+}
+
+/* Corner cells are disabled in Pixel game */
+.corner_cell {
+  background-color: lightgray;
+  cursor: not-allowed;
 }
 .row {
   position: absolute;
