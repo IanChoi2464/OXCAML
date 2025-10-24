@@ -2,3 +2,4 @@
 
 module Hw1 = Hw1
 module Hw2_pixel_logic = Hw2_pixel_logic
+module Hw4_alpha_beta_search = Hw4_alpha_beta_search
